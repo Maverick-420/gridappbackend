@@ -9,7 +9,10 @@ const app = express();
 const server = http.createServer(app);
 const PORT = process.env.PORT || 5000;
 const io = new Server(server, {
-  cors: { origin: "http://localhost:5173", methods: ["GET", "POST"] },
+  cors: {
+    origin: "https://girdappfront.netlify.app/",
+    methods: ["GET", "POST"],
+  },
 });
 
 mongoose.connect(process.env.MONGO_URI, {
@@ -17,7 +20,11 @@ mongoose.connect(process.env.MONGO_URI, {
   useUnifiedTopology: true,
 });
 
-app.use(cors());
+app.use(
+  cors({
+    origin: "https://girdappfront.netlify.app/",
+  })
+);
 app.use(express.json());
 
 app.get("/grid", async (req, res) => {
