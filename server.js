@@ -8,23 +8,25 @@ const GridCell = require("./models/GridCell");
 const app = express();
 const server = http.createServer(app);
 const PORT = process.env.PORT || 5000;
-const io = new Server(server, {
-  cors: {
-    origin: "https://girdappfront.netlify.app/",
-    methods: ["GET", "POST"],
-  },
-});
 
 mongoose.connect(process.env.MONGO_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
 
+const io = new Server(server, {
+  cors: {
+    origin: "https://girdappfront.netlify.app",
+    methods: ["GET", "POST"],
+  },
+});
+
 app.use(
   cors({
-    origin: "https://girdappfront.netlify.app/",
+    origin: "https://girdappfront.netlify.app",
   })
 );
+
 app.use(express.json());
 
 app.get("/grid", async (req, res) => {
