@@ -7,6 +7,7 @@ const { Server } = require("socket.io");
 const GridCell = require("./models/GridCell");
 const app = express();
 const server = http.createServer(app);
+const PORT = process.env.PORT || 5000;
 const io = new Server(server, {
   cors: { origin: "http://localhost:5173", methods: ["GET", "POST"] },
 });
@@ -48,7 +49,7 @@ app.post("/delete", async (req, res) => {
   res.status(200).send();
 });
 
-server.listen(5000, () => console.log("Server running on port 5000"));
+server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 
 io.on("connection", (socket) => {
   console.log("New client connected");
